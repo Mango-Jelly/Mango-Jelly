@@ -1,2 +1,4 @@
 .DS_Store
-security/*
+security/*.yml
+.env
+data/
