@@ -7,8 +7,9 @@ services:
     volumes:
       - ./data/mongo:/data/db
     environment:
-      MONGO_INIITDB_ROOT_USERNAME: ${MONGO_INIITDB_ROOT_USERNAME}
-      MONGO_INIITDB_ROOT_PASSWORD: ${MONGO_INIITDB_ROOT_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+
     networks:
       - mango-net
   
@@ -18,12 +19,16 @@ services:
     ports:
       - 3306:3306
     environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
     volumes:
       - ./data/mysql:/var/lib/mysql
+      - ./initdb/mysql:/docker-entrypoint-initdb.d/
+
     networks:
       - mango-net
 
