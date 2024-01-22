@@ -1,0 +1,49 @@
+version: "3.8"
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data/mongo:/data/db
+    environment:
+      MONGO_INIITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INIITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    networks:
+      - mango-net
+  
+  mysqldb:
+    image: mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./initdb/mysql:/docker-entrypoint-initdb.d/
+    networks:
+      - mango-net
+
+  redisdb:
+    image: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - ./data/redis:/data/db
+    networks:
+      - mango-net
+networks:
+  mango-net:
+    driver: bridge
+    # external: true
+
+
+  # backend:
+    
+  # frontend:
+    
