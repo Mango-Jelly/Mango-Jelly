@@ -30,7 +30,6 @@ services:
     volumes:
       - ./data/mysql:/var/lib/mysql
       - ./initdb/mysql:/docker-entrypoint-initdb.d/
-
     networks:
       - mango-net
 
