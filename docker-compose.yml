@@ -23,7 +23,6 @@ services:
       - 3306:3306
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
-
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     command:
       - --character-set-server=utf8mb4
@@ -34,16 +33,6 @@ services:
     networks:
       - mango-net
 
-  redisdb:
-    container_name: redisdb
-    image: redis:alpine
-    ports:
-      - 6379:6379
-    volumes:
-      - ./data/redis:/data/db
-    networks:
-      - mango-net
-      
 networks:
   mango-net:
     driver: bridge
@@ -51,6 +40,8 @@ networks:
 
 
   # backend:
-    
+
+
+
   # frontend:
     
